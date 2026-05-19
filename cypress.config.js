@@ -3,6 +3,13 @@ require('dotenv').config();
 module.exports = {
   viewportWidth: 1920,
   viewportHeight: 1080,
+  reporter: 'cypress-mochawesome-reporter',
+  reporterOptions: {
+    charts: true,
+    reportPageTitle: 'Test Report',
+    embeddedScreenshots: true,
+    inlineAssets: true,
+  },
 
   e2e: {
     baseUrl: process.env.BASE_URL,
@@ -10,7 +17,8 @@ module.exports = {
       apiBaseUrl: process.env.API_BASE_URL,
     },
     setupNodeEvents(on, config) {
-      // implement node event listeners here
+      require('cypress-mochawesome-reporter/plugin')(on);
     },
   },
 };
+
